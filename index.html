@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Operations Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex;
+      height: 100vh;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: #f6f6f6;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 230px;
+      background: linear-gradient(180deg, #1e1e2f, #121218);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding-top: 24px;
+      box-shadow: 4px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: #f5f5f5;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.25s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .nav-btn:hover {
+      background: #2b2b3d;
+      color: #fff;
+    }
+
+    .nav-btn.active {
+      background: #4b0082;
+      color: #fff;
+      border-left: 4px solid #ffd84d;
+    }
+
+    .nav-btn span.icon {
+      font-size: 18px;
+    }
+
+    /* Content Frame */
+    .content {
+      flex-grow: 1;
+      background: #fff;
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 14px;
+      font-size: 12px;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>DSC Smart Operations Panel </h2>
+    <a href="kirana.html" target="toolFrame" class="nav-btn active">
+      <span class="icon">🏪</span> Kirana Allotment
+    </a>
+    <a href="vehicle.html" target="toolFrame" class="nav-btn">
+      <span class="icon">🚚</span> Vehicle Routing
+    </a>
+
+    <footer>© 2025 Logistics Suite</footer>
+  </div>
+
+  <iframe name="toolFrame" src="kirana.html" class="content"></iframe>
+
+  <script>
+    // Highlight active button
+    const links = document.querySelectorAll('.nav-btn');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
