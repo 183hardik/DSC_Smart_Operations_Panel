@@ -189,11 +189,11 @@
       <div class="panel">
         <div class="field">
           <label for="lat">Buyer Latitude</label>
-          <input id="lat" type="number" step="any" value="12.9718" />
+          <input id="lat" type="number" step="any" value="12.9716" />
         </div>
         <div class="field">
           <label for="lng">Buyer Longitude</label>
-          <input id="lng" type="number" step="any" value="77.5940" />
+          <input id="lng" type="number" step="any" value="77.5946" />
         </div>
         <div class="field">
           <label for="parcels">No. of Parcels</label>
@@ -333,8 +333,25 @@
       if(k && k.totalCapacity-k.pastPendingOrders>=parcels){
         k.pastPendingOrders+=parcels;
         renderDB();
-        assignResultEl.innerHTML=`<div style="border:2px solid #4b0082; padding:8px 10px; border-radius:8px; background:#fffafc; font-weight:700; color:#4b0082; display:inline-block; margin-bottom:8px;">Allotment at DSC</div>
-        <div>Assigned ${parcels} parcel(s) to <strong>${k.name}</strong>. Pending now ${k.pastPendingOrders}.</div>`;
+        assignResultEl.innerHTML = `
+          <div style="border:2px solid #4b0082; padding:8px 10px; border-radius:8px; background:#fffafc; font-weight:700; color:#4b0082; display:inline-block; margin-bottom:8px;">
+            Allotment at DSC
+          </div>
+
+          <div>Assigned ${parcels} parcel(s) to <strong>${k.name}</strong>. Pending now ${k.pastPendingOrders}.</div>
+
+          <div style="margin-top:10px; font-size:13px; color:#444; background:#f8f8ff; padding:10px; border-radius:8px; line-height:1.5;">
+            <strong>How Model Auto-Filters Kiranas:</strong><br>
+            • <b>Proximity:</b> Nearby Kiranas prioritized using:<br>
+            &nbsp;&nbsp;<i>Distance Score = 1 – (distance / max distance)</i><br>
+            • <b>Capacity:</b> Must have enough space before allotment:<br>
+            &nbsp;&nbsp;<i>Capacity Score = 1 – (current load / total capacity)</i><br>
+            • <b>Seasonality:</b> Adjusts reliability using past peak performance.<br>
+            • <b>Reviews:</b> Weighted by customer rating:<br>
+            &nbsp;&nbsp;<i>Review Score = avg rating / 5</i><br>
+            <b>Final Score = 0.4·Proximity + 0.3·Capacity + 0.2·Seasonality + 0.1·Reviews</b>
+          </div>
+        `;
       } else {
         assignResultEl.innerHTML=`<div style="color:red">Not enough capacity!</div>`;
       }
@@ -345,6 +362,7 @@
   </script>
 </body>
 </html>
+
 
 
 
