@@ -249,7 +249,7 @@ function renderPlan(vehiclesResult, warnings){
   const summary=document.getElementById('resultSummary');
   area.innerHTML=''; warnEl.innerHTML='';
 
-  summary.innerHTML=`<strong>${vehiclesResult.length}</strong> Truck(s) planned. Depot: Bengaluru center (${DEPOT_LAT}, ${DEPOT_LNG})`;
+  summary.innerHTML=`<strong>${vehiclesResult.length}</strong> vehicle(s) planned. Depot: Bengaluru center (${DEPOT_LAT}, ${DEPOT_LNG})`;
   if(warnings.length){ warnEl.innerHTML=warnings.map(w=>`<div class="warn">${w}</div>`).join(''); }
 
   vehiclesResult.forEach(v=>{
@@ -262,7 +262,7 @@ function renderPlan(vehiclesResult, warnings){
     const gmapsUrl=`https://www.google.com/maps/dir/${DEPOT_LAT},${DEPOT_LNG}/${coords.join('/')}`;
     div.innerHTML=`
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div><strong>Truck ${v.id}</strong> — Utilization: ${v.utilization}% — Stops: ${v.stops.length}</div>
+        <div><strong>Vehicle ${v.id}</strong> — Utilization: ${v.utilization}% — Stops: ${v.stops.length}</div>
         <div><a class="maplink" href="${gmapsUrl}" target="_blank">Open route in Google Maps</a></div>
       </div>
       <div class="small" style="margin-top:6px;">Distance: ${(v.distance/1000).toFixed(2)} km | Est. duration: ${v.durationMin} min</div>
@@ -276,6 +276,8 @@ document.getElementById('btnPlan').addEventListener('click', planVehicles);
 </script>
 </body>
 </html>
+
+
 
 
 
